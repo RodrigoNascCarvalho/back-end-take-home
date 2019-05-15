@@ -8,6 +8,7 @@ COPY package-lock.json /api
 
 RUN npm ci
 
-COPY . /api
+COPY . /api 
 
-RUN npm run start
+# CMD npm run start
+CMD npm run init && npm run start

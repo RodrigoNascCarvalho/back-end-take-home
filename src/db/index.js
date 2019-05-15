@@ -1,19 +1,28 @@
-const { Client } = require('pg')
+const { Pool } = require('pg')
+const flights = require('./flights')
 
-const client = new Client({
+const client = new Pool({
     password: "postgres",
     user: "postgres",
     host: "postgres",
 })
 
-module.exports = (async () => {
+async function tryConnect(db) {
     try {
-        await client.connect()
+        await db.connect()
+        console.log('Connected to database with success.')
+        return db
     } catch (err) {
-        console.log('Failed to connect to database!', err)
+        setTimeout(() => {
+        console.log('Trying to connect again after 5 seconds...')
+        tryConnect(db)
+        }, 5000)
     }
+}
 
+module.exports = (() => {
     return {
-        db: client
+        connect: async () => await tryConnect(client),
+        ...flights(client)
     }
 })()

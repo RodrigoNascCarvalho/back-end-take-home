@@ -1,14 +1,15 @@
 # docker-compose.yml
 version: "3"
 services:
-  app:
+  web:
     build: .
     depends_on:
       - postgres
     ports:
       - "3000:3000"
       - "9229:9229"
-
+    tty: true
+  
   postgres:
     image: starefossen/pgrouting:10.1-2.4-2.5
     environment:
