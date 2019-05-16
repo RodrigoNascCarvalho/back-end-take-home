@@ -36,6 +36,13 @@ Two containers:
     - Copy everything to image
     - Run scripts to init db and run API
 
+## API Definition
+
+| Endpoint        |      http://localhost:3000/fastestFlight      |
+| ------------- |:-------------:|
+| Method | GET |
+| Query Params      | ?origin=XXX&destination=YYY      |
+
 ## How to Run
 
 ### Requirements
@@ -58,8 +65,8 @@ In sucession, the following should happen:
 
 ## TODOs
 
-- Add data structure based on Map to store Graph returned from getFlightDistances()
-- Add function for shortest path algorithm into API
+- ~~Add data structure based on Map to store Graph returned from getFlightDistances()~~
+- ~~Add function for shortest path algorithm into API~~
 - Find a way to codify each airport into an unique integer so shortest_path algorithm from pgRouting could be used
 - Add jest for unit tests
 - Update Dockerfile images

@@ -8,10 +8,6 @@ const readFile = promisify(fs.readFile)
 const parse = promisify(parseWithCallback)
 
 const dbInitScript = `
-    DROP TABLE airlines CASCADE;
-    DROP TABLE airports CASCADE;
-    DROP TABLE routes CASCADE;
-
     CREATE TABLE IF NOT EXISTS airlines (
         twoDigitCode VARCHAR(2) PRIMARY KEY,
         threeDigitCode VARCHAR(3) UNIQUE NOT NULL,
@@ -79,6 +75,8 @@ async function parseCsv(filepath) {
         const routeInsert = `INSERT INTO routes(company, origin, destination) VALUES${routeValues} ON CONFLICT DO NOTHING`
         await client.query(routeInsert)
         console.log('Inserted:', routeInsert)
+
+        client.release()
     } catch (err) {
         console.error('Something wrong happened!', err)
     }

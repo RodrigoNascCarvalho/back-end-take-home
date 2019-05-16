@@ -10,5 +10,4 @@ RUN npm ci
 
 COPY . /api 
 
-# CMD npm run start
 CMD npm run init && npm run start
